@@ -12,6 +12,9 @@ input.addEventListener('change', (e) => {
         image.setAttribute("src", `${reader.result}`);
         const myCropper = new Cropper(image);
         myCropper.enable();
+        image.addEventListener('cropend',(e)=>{
+            download.style.display = 'block';
+        })
         download.addEventListener('click', (e) => {
             e.preventDefault();
             let imgSrc = myCropper
@@ -21,8 +24,6 @@ input.addEventListener('change', (e) => {
             download.href = `${imgSrc}`;
             console.log(download.href);
         })
-
-
     })
     if (file.files) {
         reader.readAsDataURL(file.files[0]);
